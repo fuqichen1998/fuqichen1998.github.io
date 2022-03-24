@@ -119,7 +119,7 @@
 <html>
 <head>
 	<title>Sequential Voting with Relational Box Fields for Active Object Detection</title>
-	<meta property="og:image" content="resources/teaser.png"/> <!-- Facebook automatically scrapes this. Go to https://developers.facebook.com/tools/debug/ if you update and want to force Facebook to rescrape. -->
+	<meta property="og:image" content="resources/teaser.pdf"/> <!-- Facebook automatically scrapes this. Go to https://developers.facebook.com/tools/debug/ if you update and want to force Facebook to rescrape. -->
 	<meta property="og:title" content="Sequential Voting with Relational Box Fields for Active Object Detection" />
 	<meta property="og:description" content="Sequential Voting with Relational Box Fields for Active Object Detection" />
 
@@ -193,13 +193,47 @@
 		</table>
 	</center>
 
+	<center>
+		<table align=center width=850px>
+			<tr>
+				<td width=260px>
+					<center>
+						<!-- <iframe src="file_name.pdf" style="width: 100%;height: 100%;border: none;"></iframe> -->
+						<embed src="./resources/teaser.pdf" width="720px" height="336px" />
+						<!-- <img class="round" style="width:500px" src="./resources/teaser.png" /> -->
+					</center>
+				</td>
+			</tr>
+		</table>
+	</center>
+
 	<hr>
 
 	<table align=center width=850px>
 		<center><h1>Abstract</h1></center>
 		<tr>
 			<td>
-				This is my abstract.
+				A key component of understanding hand-object interactions is the ability to identify the active object -- the object
+				that is being manipulated by the human hand.
+				In order to accurately localize the active object, any method must reason using information encoded by each image pixel,
+				such as whether it belongs to the hand, the object, or the background.
+				To leverage each pixel as evidence to determine the bounding box of the active object, we propose a pixel-wise voting
+				function.
+				Our pixel-wise voting function takes an initial bounding box as input and produces an improved bounding box of the
+				active object as output.
+				The voting function is designed so that each pixel inside of the input bounding box votes for an improved bounding box,
+				and the box with the majority vote is selected as the output.
+				We call the collection of bounding boxes generated inside of the voting function, the Relational Box Field, as it
+				characterizes a field of bounding boxes defined in relationship to the current bounding box.
+				While our voting function is able to improve the bounding box of the active object, one round of voting is typically not
+				enough to accurately localize the active object.
+				Therefore, we repeatedly apply the voting function to sequentially improve the location of the bounding box. However,
+				since it is known that repeatedly applying a one-step predictor (i.e., auto-regressive processing with our voting
+				function) can cause a data distribution shift, we mitigate this issue using reinforcement learning (RL).
+				We adopt standard RL to learn the voting function parameters and show that it provides a meaningful improvement over a
+				standard supervised learning approach.
+				We perform experiments on two large-scale datasets: 100DOH and MECCANO, improving AP50 performance by 8% and 30%,
+				respectively, over the state of the art.
 			</td>
 		</tr>
 	</table>

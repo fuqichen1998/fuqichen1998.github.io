@@ -1,6 +1,6 @@
-@inproceedings{author20XXtitle,
-  title={Please cite me},
-  author={Author, First and Author, Second and Author, Third},
-  booktitle={Conference},
-  year={20XX}
+@inproceedings{fu2021sequential,
+  title={Sequential Decision-Making for Active Object Detection from Hand},
+  author={Fu, Qichen and Liu, Xingyu and Kitani, Kris M},
+  booktitle={Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition},
+  year={2022}
 }
