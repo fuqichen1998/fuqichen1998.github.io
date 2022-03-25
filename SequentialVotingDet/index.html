@@ -165,7 +165,7 @@
 				<tr>
 					<td align=center>
 						<center>
-							<span style="font-size:18px"> Carnegie Mellon University</span>
+							<span style="font-size:18px">Carnegie Mellon University</span>
 						</center>
 					</td>
 				</tr>
@@ -198,9 +198,7 @@
 			<tr>
 				<td width=260px>
 					<center>
-						<!-- <iframe src="file_name.pdf" style="width: 100%;height: 100%;border: none;"></iframe> -->
-						<embed src="./resources/teaser.pdf" width="720px" height="336px" />
-						<!-- <img class="round" style="width:500px" src="./resources/teaser.png" /> -->
+						<img class="round" style="width:500px" src="./resources/teaser.png" />
 					</center>
 				</td>
 			</tr>
@@ -237,41 +235,123 @@
 			</td>
 		</tr>
 	</table>
+
 	<br>
-
 	<hr>
-	<center><h1>Talk</h1></center>
-	<p align="center">
-		<iframe width="660" height="395" src="" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen align="center"></iframe>
-	</p>
-
-	<table align=center width=800px>
-		<br>
+	
+	<table align=center width=850px>
+		<center>
+			<h1>Method</h1>
+		</center>
 		<tr>
-			<center>
-				<span style="font-size:28px"><a href=''>[Slides]</a>
-				</span>
-			</center>
+			<td>
+				To achieve robust object localization, especially under occlusion, we propose a voting function with the Relational Box Field 
+				that allows each pixel in the image to vote for a bounding box of the active object. Then we progressively refine it towards a more accurate
+				active object bounding box in a sequential decision-making process modeled by a Markov decision process (MDP).
+			</td>
+		</tr>
+		<tr>
+			<td style="padding:5px">
+				<center>
+					<img class="round" style="width:850px" src="./resources/method_diagram.png" />
+				</center>
+			</td>
 		</tr>
 	</table>
+
 	<br>
 	<hr>
+	
+	<table align=center width=850px>
+		<center>
+			<h1>Results</h1>
+		</center>
+		<tr>
+			<td>
+				We present the qualitative results of our method below. In the figures, each green arrow points from a hand bounding box (blue) to 
+				the corresponding active object bounding box (red). The visualization shows that our method is able to robustly detect the active 
+				object under scenes with overlapping objects and severe occlusions. Most failure cases are due to wrong hand detection, motion blur, 
+				and insufficient feature from tiny hands and objects. Please check our paper for further results and comparisons.
+			</td>
+		</tr>
+		<tr>
+			<td style="padding:5px">
+				<center>
+					<img class="round" style="width:850px" src="./resources/qualitative_100doh.png" />
+					<figcaption>Qualitative Results on 100DOH Dataset</figcaption>
+				</center>
+			</td>
+		</tr>
+		<tr>
+			<td style="padding:5px">
+				<center>
+					<img class="round" style="width:850px" src="./resources/qualitative_meccano.png" />
+					<figcaption>Qualitative Results on MECCANO Dataset</figcaption>
+				</center>
+			</td>
+		</tr>
+	</table>
+
+	<br>
+	<hr>
+
+	<table align=center width=850px>
+		<center>
+			<h1>Analysis</h1>
+		</center>
+		<tr>
+			<td>
+				We visualize the IoU (red indicates higher IoU) between the final active object box estimation (red) and the pixel-wise
+				predictions inside the hand bounding box (blue). The visualizations show our voting function is able to adapt
+				predictions from informative hand parts like fingers as opposed to irrelevant parts like wrist and background. Every visualization
+				sample below only shows one pair of hands and objects for better visibility.
+			</td>
+		</tr>
+		<tr>
+			<td style="padding:5px">
+				<center>
+					<img class="round" style="width:850px" src="./resources/voting_IoU_1.png" />
+				</center>
+			</td>
+		</tr>
+		<tr>
+			<td style="padding:5px">
+				<center>
+					<img class="round" style="width:850px" src="./resources/voting_IoU_2.png" />
+				</center>
+			</td>
+		</tr>
+		<tr>
+			<td style="padding:5px">
+				<center>
+					<img class="round" style="width:850px" src="./resources/voting_IoU_3.png" />
+				</center>
+			</td>
+		</tr>
+		<tr>
+			<td style="padding:5px">
+				<center>
+					<img class="round" style="width:850px" src="./resources/voting_IoU_4.png" />
+				</center>
+			</td>
+		</tr>
+	</table>
+	
+	<br>
+	<hr>
+
 	<table align=center width=450px>
 		<center><h1>Paper and Supplementary Material</h1></center>
 		<tr>
-			<td><a href=""><img class="layered-paper-big" style="height:175px" src="./resources/paper.png"/></a></td>
+			<td><a href="https://arxiv.org/abs/2110.11524"><img class="layered-paper-big" style="height:175px" src="./resources/paper.png"/></a></td>
 			<td><span style="font-size:14pt">Qichen Fu, Xingyu Liu, Kris M. Kitani<br>
 				<b>Sequential Voting with Relational Box Fields for Active Object Detection</b><br>
 				CVPR, 2022.<br>
-				(hosted on <a href="">ArXiv</a>)<br>
-				<!-- (<a href="./resources/camera-ready.pdf">camera ready</a>)<br> -->
-				<span style="font-size:4pt"><a href=""><br></a>
-				</span>
+				(hosted on <a href="https://arxiv.org/abs/2110.11524">ArXiv</a>)<br>
 			</td>
 		</tr>
 	</table>
 	<br>
-
 	<table align=center width=600px>
 		<tr>
 			<td><span style="font-size:14pt"><center>
