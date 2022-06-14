@@ -1,6 +1,7 @@
-@inproceedings{fu2021sequential,
-  title={Sequential Decision-Making for Active Object Detection from Hand},
-  author={Fu, Qichen and Liu, Xingyu and Kitani, Kris M},
+@inproceedings{fu2022sequential,
+  title={Sequential voting with relational box fields for active object detection},
+  author={Fu, Qichen and Liu, Xingyu and Kitani, Kris},
   booktitle={Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition},
+  pages={2374--2383},
   year={2022}
 }
