@@ -1,0 +1,689 @@
+<script src="http://www.google.com/jsapi" type="text/javascript"></script> 
+<script type="text/javascript">google.load("jquery", "1.3.2");</script>
+
+<style type="text/css">
+	body {
+		font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+		font-weight:300;
+		font-size:18px;
+		margin-left: auto;
+		margin-right: auto;
+		width: 1100px;
+	}
+	
+	h1 {
+		font-size:32px;
+		font-weight:300;
+	}
+
+	h2 {
+		font-size:24px;
+		font-weight:300;
+	}
+	
+	.disclaimerbox {
+		background-color: #eee;		
+		border: 1px solid #eeeeee;
+		border-radius: 10px ;
+		-moz-border-radius: 10px ;
+		-webkit-border-radius: 10px ;
+		padding: 20px;
+	}
+
+	video.header-vid {
+		height: 140px;
+		border: 1px solid black;
+		border-radius: 10px ;
+		-moz-border-radius: 10px ;
+		-webkit-border-radius: 10px ;
+	}
+	
+	img.header-img {
+		height: 140px;
+		border: 1px solid black;
+		border-radius: 10px ;
+		-moz-border-radius: 10px ;
+		-webkit-border-radius: 10px ;
+	}
+	
+	img.rounded {
+		border: 1px solid #eeeeee;
+		border-radius: 10px ;
+		-moz-border-radius: 10px ;
+		-webkit-border-radius: 10px ;
+	}
+	
+	a:link,a:visited
+	{
+		color: #1367a7;
+		text-decoration: none;
+	}
+	a:hover {
+		color: #208799;
+	}
+	
+	td.dl-link {
+		height: 160px;
+		text-align: center;
+		font-size: 22px;
+	}
+	
+	.layered-paper-big { /* modified from: http://css-tricks.com/snippets/css/layered-paper/ */
+		box-shadow:
+		0px 0px 1px 1px rgba(0,0,0,0.35), /* The top layer shadow */
+		5px 5px 0 0px #fff, /* The second layer */
+		5px 5px 1px 1px rgba(0,0,0,0.35), /* The second layer shadow */
+		10px 10px 0 0px #fff, /* The third layer */
+		10px 10px 1px 1px rgba(0,0,0,0.35), /* The third layer shadow */
+		15px 15px 0 0px #fff, /* The fourth layer */
+		15px 15px 1px 1px rgba(0,0,0,0.35), /* The fourth layer shadow */
+		20px 20px 0 0px #fff, /* The fifth layer */
+		20px 20px 1px 1px rgba(0,0,0,0.35), /* The fifth layer shadow */
+		25px 25px 0 0px #fff, /* The fifth layer */
+		25px 25px 1px 1px rgba(0,0,0,0.35); /* The fifth layer shadow */
+		margin-left: 10px;
+		margin-right: 45px;
+	}
+
+	.paper-big { /* modified from: http://css-tricks.com/snippets/css/layered-paper/ */
+		box-shadow:
+		0px 0px 1px 1px rgba(0,0,0,0.35); /* The top layer shadow */
+
+		margin-left: 10px;
+		margin-right: 45px;
+	}
+
+
+	.layered-paper { /* modified from: http://css-tricks.com/snippets/css/layered-paper/ */
+		box-shadow:
+		0px 0px 1px 1px rgba(0,0,0,0.35), /* The top layer shadow */
+		5px 5px 0 0px #fff, /* The second layer */
+		5px 5px 1px 1px rgba(0,0,0,0.35), /* The second layer shadow */
+		10px 10px 0 0px #fff, /* The third layer */
+		10px 10px 1px 1px rgba(0,0,0,0.35); /* The third layer shadow */
+		margin-top: 5px;
+		margin-left: 10px;
+		margin-right: 30px;
+		margin-bottom: 5px;
+	}
+	
+	.vert-cent {
+		position: relative;
+		top: 50%;
+		transform: translateY(-50%);
+	}
+	
+	hr
+	{
+		border: 0;
+		height: 1px;
+		background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+	}
+
+	.blank_row
+	{
+		height: 50px;
+		background-color: #FFFFFF;
+	}
+</style>
+
+<html>
+<head>
+	<title>Deformer: Dynamic Fusion Transformer for Robust Hand Pose Estimation</title>
+	<meta property="og:image" content="resources/teaser.png"/> <!-- Facebook automatically scrapes this. Go to https://developers.facebook.com/tools/debug/ if you update and want to force Facebook to rescrape. -->
+	<meta property="og:title" content="Deformer: Dynamic Fusion Transformer for Robust Hand Pose Estimation" />
+	<meta property="og:description" content="Deformer: Dynamic Fusion Transformer for Robust Hand Pose Estimation" />
+
+	<!-- Get from Google Analytics -->
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async src=""></script> 
+	<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag(){dataLayer.push(arguments);}
+		gtag('js', new Date());
+
+		gtag('config', 'UA-75863369-6');
+	</script>
+</head>
+
+<body>
+	<br>
+	<center>
+		<span style="font-size:34px">Deformer: Dynamic Fusion Transformer for Robust Hand Pose Estimation</span>
+		<br><br>
+		<table align=center width=600px>
+		<table align=center width=1000px>
+			<table align=center width=1000px>
+				<tr>
+					<td align=center width=100px>
+						<center>
+							<span style="font-size:21px"><a href="https://fuqichen1998.github.io/">Qichen Fu</a><sup>1</sup></span>
+						</center>
+					</td>
+					<td align=center width=100px>
+						<center>
+							<span style="font-size:21px"><a href="https://xingyul.github.io/">Xingyu Liu</a><sup>1</sup></span>
+						</center>
+					</td>
+					<td align=center width=100px>
+						<center>
+							<span style="font-size:21px">Ran Xu<sup>2</sup></span>
+						</center>
+					</td>
+					<td align=center width=100px>
+						<center>
+							<span style="font-size:21px"><a href="http://www.niebles.net/">Juan Carlos Niebles</a><sup>2</sup></span>
+						</center>
+					</td>
+					<td align=center width=100px>
+						<center>
+							<span style="font-size:21px"><a href="http://www.cs.cmu.edu/~kkitani/">Kris M. Kitani</a><sup>1</sup></span>
+						</center>
+					</td>
+				</tr>
+			</table>
+			<br>
+			<table>
+				<tr>
+					<td align=center width=250px>
+						<center>
+							<sup>1</sup><span style="font-size:18px">Carnegie Mellon University</span>
+						</center>
+					</td>
+					<td align=center width=250px>
+						<center>
+							<sup>2</sup><span style="font-size:18px">Salesforce Research</span>
+						</center>
+					</td>
+				</tr>
+			</table>
+			<br>
+		</table>
+	</center>
+
+	<br>
+
+	<center>
+		<table align=center width=850px>
+			<tr>
+				<td>
+					<table align=center width=850px>
+						<tr>
+							<th>Input Video</th>
+							<th>Baseline (TCMR)</th>
+							<th>Ours (Deformer)</th>
+						</tr>
+						<tr>
+							<td>
+								<video width="270px" autoplay controls loop muted>
+									<source src="./resources/dexycb_videos/video_sample0.mp4" type="video/mp4" />
+								</video>
+							</td>
+							<td>
+								<video width="270px" autoplay controls loop muted>
+									<source src="./resources/dexycb_errormap_samples/tcmr_sample0.mp4" type="video/mp4" />
+								</video>
+							</td>
+							<td>
+								<video width="270px" autoplay controls loop muted>
+									<source src="./resources/dexycb_errormap_samples/ours_sample0.mp4" type="video/mp4" />
+								</video>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<video width="270px" autoplay controls loop muted>
+									<source src="./resources/dexycb_videos/video_sample1.mp4" type="video/mp4" />
+								</video>
+							</td>
+							<td>
+								<video width="270px" autoplay controls loop muted>
+									<source src="./resources/dexycb_errormap_samples/tcmr_sample1.mp4" type="video/mp4" />
+								</video>
+							</td>
+							<td>
+								<video width="270px" autoplay controls loop muted>
+									<source src="./resources/dexycb_errormap_samples/ours_sample1.mp4" type="video/mp4" />
+								</video>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<video width="270px" autoplay controls loop muted>
+									<source src="./resources/dexycb_videos/video_sample2.mp4" type="video/mp4" />
+								</video>
+							</td>
+							<td>
+								<video width="270px" autoplay controls loop muted>
+									<source src="./resources/dexycb_errormap_samples/tcmr_sample2.mp4" type="video/mp4" />
+								</video>
+							</td>
+							<td>
+								<video width="270px" autoplay controls loop muted>
+									<source src="./resources/dexycb_errormap_samples/ours_sample2.mp4" type="video/mp4" />
+								</video>
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td style="padding:5px">
+					<center>
+						<img class="round" style="width:850px" src="./resources/errorbar.png" />
+					</center>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<center>
+						<p>Deformer, a method to robustly estimate 3D hand pose in video via learning hand deformation and visual accountability.</p>
+					</center>
+					
+				</td>
+			</tr>
+		</table>
+	</center>
+	
+	<br>
+	<hr>
+
+	<table align=center width=850px>
+		<center><h1>Abstract</h1></center>
+		<tr>
+			<td>
+				Accurately estimating 3D hand pose is crucial for understanding how humans interact with the world. Despite remarkable
+				progress, existing methods often struggle to generate plausible hand poses when the hand is heavily occluded or blurred.
+				In videos, the movements of the hand allow us to observe various parts of the hand that may be occluded or blurred in a
+				single frame. To adaptively leverage the visual clue before and after the occlusion or blurring for robust hand pose
+				estimation, we propose the Deformer: a framework that implicitly reasons about the relationship between hand parts
+				within the same image (spatial dimension) and different timesteps (temporal dimension). We show that a naive application
+				of the transformer self-attention mechanism is not sufficient because motion blur or occlusions in certain frames can
+				lead to heavily distorted hand features and generate imprecise keys and queries. To address this challenge, we
+				incorporate a Dynamic Fusion Module into Deformer, which predicts the deformation of the hand and warps the hand mesh
+				predictions from nearby frames to explicitly support the current frame estimation. Furthermore, we have observed that
+				errors are unevenly distributed across different hand parts, with vertices around fingertips having disproportionately
+				higher errors than those around the palm. We mitigate this issue by introducing a new loss function called maxMSE that
+				automatically adjusts the weight of every vertex to focus the model on critical hand parts. Extensive experiments show
+				that our method significantly outperforms state-of-the-art methods by 10%, and is more robust to occlusions (over
+				14%).
+			</td>
+		</tr>
+	</table>
+	
+	<br>
+	<hr>
+
+	<table align=center width=850px>
+		<center>
+			<h1>Method</h1>
+		</center>
+		<tr>
+			<td>
+				Overview of the Deformer Architecture. Our approach uses transformers to reason spatial and temporal relationships
+				between hand parts in an image sequence, and output frame-wise hand pose and motion. In order to overcome the
+				challenge when the hand is heavily occluded or blurred in some frames, the Dynamic Fusion Module explicitly deforms the
+				hand poses from neighborhood frames and fuses them toward a robust hand pose estimation.
+			</td>
+		</tr>
+		<tr>
+			<td style="padding:5px">
+				<center>
+					<img class="round" style="width:850px" src="./resources/method.png" />
+				</center>
+			</td>
+		</tr>
+	</table>
+
+	<br>
+	<hr>
+	
+	<table align=center width=850px>
+		<center>
+			<h1>Results</h1>
+		</center>
+		<tr>
+			<td>
+				<center>
+					<h2>Comparsion with SOTA Video-based Method (TCMR)</h2>
+				</center>
+			</td>
+		</tr>
+		
+		<tr>
+			<td>
+				Given a video (left column) where the hand is occluded or blurred in some frames, the existing state-of-the-art
+				video-based method TCMR (middle column) fails to
+				predict accurate hand poses. Our method (right) is able to capture the hand dynamics and leverage neighborhood frames to
+				robustly produce plausible hand pose estimations.
+				For each method, we visualize the 3D hand mesh with colors indicating the Mean Per Joint Position Error (MPJPE) in
+				millimeter (mm) w.r.t the ground truth, where the <span style="color:red;">red color</span> indicates a <i>higher</i>
+				error and the <span style="color:blue;">blue color</span>
+				indicates a
+				<i>lower</i> error.
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<table align=center width=850px>
+					<tr>
+						<th>Input Video</th>
+						<th>Baseline (TCMR)</th>
+						<th>Ours (Deformer)</th>
+					</tr>
+					<tr>
+						<td>
+							<video width="270px" autoplay controls loop muted>
+								<source src="./resources/dexycb_videos/video_sample3.mp4" type="video/mp4" />
+							</video>
+						</td>
+						<td>
+							<video width="270px" autoplay controls loop muted>
+								<source src="./resources/dexycb_errormap_samples/tcmr_sample3.mp4" type="video/mp4" />
+							</video>
+						</td>
+						<td>
+							<video width="270px" autoplay controls loop muted>
+								<source src="./resources/dexycb_errormap_samples/ours_sample3.mp4" type="video/mp4" />
+							</video>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<video width="270px" autoplay controls loop muted>
+								<source src="./resources/dexycb_videos/video_sample4.mp4" type="video/mp4" />
+							</video>
+						</td>
+						<td>
+							<video width="270px" autoplay controls loop muted>
+								<source src="./resources/dexycb_errormap_samples/tcmr_sample4.mp4" type="video/mp4" />
+							</video>
+						</td>
+						<td>
+							<video width="270px" autoplay controls loop muted>
+								<source src="./resources/dexycb_errormap_samples/ours_sample4.mp4" type="video/mp4" />
+							</video>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<video width="270px" autoplay controls loop muted>
+								<source src="./resources/dexycb_videos/video_sample5.mp4" type="video/mp4" />
+							</video>
+						</td>
+						<td>
+							<video width="270px" autoplay controls loop muted>
+								<source src="./resources/dexycb_errormap_samples/tcmr_sample5.mp4" type="video/mp4" />
+							</video>
+						</td>
+						<td>
+							<video width="270px" autoplay controls loop muted>
+								<source src="./resources/dexycb_errormap_samples/ours_sample5.mp4" type="video/mp4" />
+							</video>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<video width="270px" autoplay controls loop muted>
+								<source src="./resources/dexycb_videos/video_sample6.mp4" type="video/mp4" />
+							</video>
+						</td>
+						<td>
+							<video width="270px" autoplay controls loop muted>
+								<source src="./resources/dexycb_errormap_samples/tcmr_sample6.mp4" type="video/mp4" />
+							</video>
+						</td>
+						<td>
+							<video width="270px" autoplay controls loop muted>
+								<source src="./resources/dexycb_errormap_samples/ours_sample6.mp4" type="video/mp4" />
+							</video>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<video width="270px" autoplay controls loop muted>
+								<source src="./resources/dexycb_videos/video_sample7.mp4" type="video/mp4" />
+							</video>
+						</td>
+						<td>
+							<video width="270px" autoplay controls loop muted>
+								<source src="./resources/dexycb_errormap_samples/tcmr_sample7.mp4" type="video/mp4" />
+							</video>
+						</td>
+						<td>
+							<video width="270px" autoplay controls loop muted>
+								<source src="./resources/dexycb_errormap_samples/ours_sample7.mp4" type="video/mp4" />
+							</video>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<video width="270px" autoplay controls loop muted>
+								<source src="./resources/dexycb_videos/video_sample8.mp4" type="video/mp4" />
+							</video>
+						</td>
+						<td>
+							<video width="270px" autoplay controls loop muted>
+								<source src="./resources/dexycb_errormap_samples/tcmr_sample8.mp4" type="video/mp4" />
+							</video>
+						</td>
+						<td>
+							<video width="270px" autoplay controls loop muted>
+								<source src="./resources/dexycb_errormap_samples/ours_sample8.mp4" type="video/mp4" />
+							</video>
+						</td>
+					</tr>
+				</table>
+			</td>
+		</tr>
+		<tr>
+			<td style="padding:5px">
+				<center>
+					<img class="round" style="width:850px" src="./resources/errorbar.png" />
+				</center>
+			</td>
+		</tr>
+
+		<tr>
+			<td>
+				<center>
+					<h2>Qualitative Results on the HO3D Dataset</h2>
+				</center>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				Qualitative results on the HO3D dataset. As the HO3D test set annotation is not publicly released, we only show
+				the predicted 3D hand meshes for exemplary test sequences. Despite heavy hand-object occlusions, our method can still
+				generate stable and plausible 3D hand pose estimations.
+			</td>
+		</tr>
+		<tr>
+			<td width=850px>
+				<center>
+					<video style="width:270px" autoplay controls loop muted>
+						<source src="./resources/ho3d_mesh_samples/ours_sample0.mp4" type="video/mp4" />
+					</video>
+					<video style="width:270px" autoplay controls loop muted>
+						<source src="./resources/ho3d_mesh_samples/ours_sample1.mp4" type="video/mp4" />
+					</video>
+					<video style="width:270px" autoplay controls loop muted>
+						<source src="./resources/ho3d_mesh_samples/ours_sample2.mp4" type="video/mp4" />
+					</video>
+				</center>
+			</td>
+		</tr>
+		<tr>
+			<td width=850px>
+				<center>
+					<video style="width:270px" autoplay controls loop muted>
+						<source src="./resources/ho3d_mesh_samples/ours_sample3.mp4" type="video/mp4" />
+					</video>
+					<video style="width:270px" autoplay controls loop muted>
+						<source src="./resources/ho3d_mesh_samples/ours_sample4.mp4" type="video/mp4" />
+					</video>
+					<video style="width:270px" autoplay controls loop muted>
+						<source src="./resources/ho3d_mesh_samples/ours_sample5.mp4" type="video/mp4" />
+					</video>
+				</center>
+			</td>
+		</tr>
+		<tr>
+			<td width=850px>
+				<center>
+					<video style="width:270px" autoplay controls loop muted>
+						<source src="./resources/ho3d_mesh_samples/ours_sample6.mp4" type="video/mp4" />
+					</video>
+					<video style="width:270px" autoplay controls loop muted>
+						<source src="./resources/ho3d_mesh_samples/ours_sample7.mp4" type="video/mp4" />
+					</video>
+					<video style="width:270px" autoplay controls loop muted>
+						<source src="./resources/ho3d_mesh_samples/ours_sample8.mp4" type="video/mp4" />
+					</video>
+				</center>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<center>
+					<h2>Qualitative Results on the DexYCB Dataset</h2>
+				</center>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				Qualitative results on the DexYCB dataset. Our method can generalize to different hand shapes and poses, even under
+				diverse and complicated hand-object interactions.
+			</td>
+		</tr>
+		<tr>
+			<td width=850px>
+				<center>
+					<video style="width:270px" autoplay controls loop muted>
+						<source src="./resources/dexycb_mesh_samples/ours_sample9.mp4" type="video/mp4" />
+					</video>
+					<video style="width:270px" autoplay controls loop muted>
+						<source src="./resources/dexycb_mesh_samples/ours_sample10.mp4" type="video/mp4" />
+					</video>
+					<video style="width:270px" autoplay controls loop muted>
+						<source src="./resources/dexycb_mesh_samples/ours_sample11.mp4" type="video/mp4" />
+					</video>
+				</center>
+			</td>
+		</tr>
+		<tr>
+			<td width=850px>
+				<center>
+					<video style="width:270px" autoplay controls loop muted>
+						<source src="./resources/dexycb_mesh_samples/ours_sample12.mp4" type="video/mp4" />
+					</video>
+					<video style="width:270px" autoplay controls loop muted>
+						<source src="./resources/dexycb_mesh_samples/ours_sample13.mp4" type="video/mp4" />
+					</video>
+					<video style="width:270px" autoplay controls loop muted>
+						<source src="./resources/dexycb_mesh_samples/ours_sample14.mp4" type="video/mp4" />
+					</video>
+				</center>
+			</td>
+		</tr>
+		<tr>
+			<td width=850px>
+				<center>
+					<video style="width:270px" autoplay controls loop muted>
+						<source src="./resources/dexycb_mesh_samples/ours_sample15.mp4" type="video/mp4" />
+					</video>
+					<video style="width:270px" autoplay controls loop muted>
+						<source src="./resources/dexycb_mesh_samples/ours_sample16.mp4" type="video/mp4" />
+					</video>
+					<video style="width:270px" autoplay controls loop muted>
+						<source src="./resources/dexycb_mesh_samples/ours_sample17.mp4" type="video/mp4" />
+					</video>
+				</center>
+			</td>
+		</tr>
+	</table>
+
+	<br>
+	<hr>
+
+	<table align=center width=850px>
+		<center>
+			<h1>Analysis</h1>
+		</center>
+		<tr>
+			<td>
+				We visualize the scatter plot and mean ± standard deviation of MPJPE on DexYCB test data samples within
+				different hand-object occlusion level ranges.
+				Compared to the baseline, our method significantly reduces the hand pose estimation error in all occlusion
+				levels, especially when the hand is heavily occluded.
+			</td>
+		</tr>
+		<tr>
+			<td style="padding:5px">
+				<center>
+					<img class="round" style="width:45%" src="./resources/coverage_vs_mpjpe_comparsion.png" />
+					<img class="round" style="width:45%" src="./resources/coverage_vs_mpjpe_meanstd_comparsion.png" />
+				</center>
+			</td>
+		</tr>
+		<tr class="blank_row"></tr>
+		<tr>
+			<td>
+				We visualize the confidence score predicted by the Dynamic Fusion Model. The proposed model can implicitly learn
+				visual accountability and assign lower confidence to frames where hands are blurred and occluded.
+			</td>
+		</tr>
+		<tr>
+			<td style="padding:5px">
+				<center>
+					<img class="round" style="width:100%" src="./resources/confidence_visualization.png" />
+				</center>
+			</td>
+		</tr>
+	</table>
+
+	<br>
+	<hr>
+	
+	<table align=center width=450px>
+		<center>
+			<h1>Paper and Supplementary Material</h1>
+		</center>
+		<tr>
+			<td><a href="https://arxiv.org/abs/2303.04991"><img class="layered-paper-big" style="height:175px"
+						src="./resources/paper.png" /></a></td>
+			<td><span style="font-size:14pt">Qichen Fu, Xingyu Liu, Ran Xu, Juan Carlos Niebles, Kris M. Kitani<br>
+					<b>Deformer: Dynamic Fusion Transformer for Robust Hand Pose Estimation</b><br>
+					(hosted on <a href="https://arxiv.org/abs/2303.04991">ArXiv</a>)<br>
+			</td>
+		</tr>
+	</table>
+	<br>
+	<table align=center width=600px>
+		<tr>
+			<td><span style="font-size:14pt">
+					<center>
+						<a href="./resources/bibtex.txt">[Bibtex]</a>
+					</center>
+			</td>
+		</tr>
+	</table>
+	
+	<br>
+	<hr>
+
+	<table align=center width=900px>
+		<tr>
+			<td width=400px>
+				<left>
+					<center><h1>Acknowledgements</h1></center>
+					This template was originally made by <a href="http://web.mit.edu/phillipi/">Phillip Isola</a> and <a href="http://richzhang.github.io/">Richard Zhang</a> for a <a href="http://richzhang.github.io/colorization/">colorful</a> ECCV project; the code can be found <a href="https://github.com/richzhang/webpage-template">here</a>.
+				</left>
+			</td>
+		</tr>
+	</table>
+	
+<br>
+</body>
+</html>
+
