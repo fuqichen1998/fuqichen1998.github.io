@@ -1,0 +1,6 @@
+@article{fu2023deformer,
+  title={Deformer: Dynamic Fusion Transformer for Robust Hand Pose Estimation},
+  author={Fu, Qichen and Liu, Xingyu and Xu, Ran and Niebles, Juan Carlos and Kitani, Kris M},
+  journal={arXiv preprint arXiv:2303.04991},
+  year={2023}
+}
